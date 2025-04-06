@@ -9,3 +9,5 @@ __pycache__/
 *.log
 *.bak
 *.tmp
+media/
+*.DS_Store
