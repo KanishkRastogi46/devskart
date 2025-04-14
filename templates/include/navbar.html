@@ -37,19 +37,14 @@
 					<i class="fa fa-bars"></i> All category 
 				</button>
 				<div class="dropdown-menu">
-					{% comment %} <a class="dropdown-item" href="#">Machinery / Mechanical Parts / Tools </a>
-					<a class="dropdown-item" href="#">Consumer Electronics / Home Appliances </a>
-					<a class="dropdown-item" href="#">Auto / Transportation</a>
-					<a class="dropdown-item" href="#">Apparel / Textiles / Timepieces </a>
-					<a class="dropdown-item" href="#">Home & Garden / Construction / Lights </a>
-					<a class="dropdown-item" href="#">Beauty & Personal Care / Health </a>  {% endcomment %}
+					<a href="{% url "store" %}" class="dropdown-item">All Products</a>
                     {% for category in links  %}
                         <a href="{{ category.get_url }}" class="dropdown-item">{{ category.category_name }}</a>
                     {% endfor %}
 				</div>
 			</div>  <!-- category-wrap.// -->
 		</div> <!-- col.// -->
-		<a href="store" class="btn btn-outline-primary">Store</a>
+		<a href="/store" class="btn btn-outline-primary">Store</a>
 		<div class="col-lg  col-md-6 col-sm-12 col">
 			<form action="#" class="search">
 				<div class="input-group w-100">
