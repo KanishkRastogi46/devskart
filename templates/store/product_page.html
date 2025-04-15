@@ -70,7 +70,11 @@
             </div>
         </div> <!-- row.// -->
         <hr>
-        <a href="./product-detail.html" class="btn  btn-primary"> <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i>  </a>
+        {% if not product.stock == 0 %}
+          <a href="./product-detail.html" class="btn  btn-primary"> <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i>  </a>
+        {% else %} <h3 class="text-danger">Out of stock</h3>
+        {% endif %}
+        
     </article> <!-- product-info-aside .// -->
             </main> <!-- col.// -->
         </div> <!-- row.// -->
