@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from accounts.models import CustomUser
 from store.models import Product
 
@@ -6,12 +7,10 @@ from store.models import Product
 class Cart(models.Model):
     cart_id = models.CharField(max_length=250, blank=False, primary_key=True)
     # user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-    num_of_items = models.IntegerField(default=0)
-    total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     created_at = models.DateTimeField(auto_now=True)
     
     def __str__(self):
-        return f"Cart of {self.user.username}"
+        return f"{self.cart_id}"
     
     
 class CartItems(models.Model):
@@ -20,5 +19,11 @@ class CartItems(models.Model):
     quantity = models.IntegerField(default=1)
     is_active = models.BooleanField(default=True)
     
+    def sub_total(self):
+        return self.product.price * self.quantity
+    
+    # def add_to_cart(self):
+    #     return reverse('add_to_cart', args=[self.product])
+    
     def __str__(self):
-        return f"{self.product.product_name} in {self.cart.user.username}'s cart"
+        return f"{self.product.product_name} in {self.cart.cart_id}"

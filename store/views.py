@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from store.models import Product
 from category.models import Category
 from store.models import Product
+from carts.models import Cart, CartItems
+from carts.views import _cart_id
 
 # Create your views here.
 def index(request, category_name=None):
@@ -21,4 +23,8 @@ def index(request, category_name=None):
 
 def product_page(request, category_name=None, product_name=None):
     product = get_object_or_404(Product, slug=product_name, category__slug=category_name) if category_name else get_object_or_404(Product, slug=product_name)
-    return render(request, 'store/product_page.html', {'product': product})
+    try:
+        in_cart = CartItems.objects.filter(CartItems, product=product, cart__cart_id=_cart_id(request)).exists()
+    except Exception:
+        in_cart = None
+    return render(request, 'store/product_page.html', {'product': product, 'in_cart': in_cart})
